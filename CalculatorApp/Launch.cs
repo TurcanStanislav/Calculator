@@ -8,27 +8,56 @@ namespace CalculatorApp
         private static decimal operand2;
         private static char _operator;
         private static decimal result;
+        private static bool finishedCalculation;
 
-
-        static void NextAction()
+        static bool CheckIfShortcut(char ch)
         {
-            char control;
-            const char NORMAL_MODE = '0';
+            bool isShortcut = false;
 
-            Console.WriteLine("Press A to continue, Q to quit, Z to clear screen, C to continue the previous one, N to start a new calculation...");
-            control = Console.ReadKey().KeyChar;
+            switch (ch)
+            {
+                case 'Q':
+                    isShortcut = true;
+                    break;
+                case 'N':
+                    isShortcut = true;
+                    break;
+                case 'C':
+                    isShortcut = true;
+                    break;
+                case 'Z':
+                    isShortcut = true;
+                    break;
+                default:
+                    break;
+            }
+
+            return isShortcut;
+        }
+        static void CheckIfNextAction(char ch)
+        {
+            string temp = Convert.ToString(ch);
+            temp = temp.ToUpper();
+            ch = Convert.ToChar(temp);
+
+            if (CheckIfShortcut(ch) == true)
+                NextAction(ch);
+        }
+        static void NextAction(char control)
+        {
+            const char NORMAL_MODE = '0';
+  
             string temp = Convert.ToString(control);
             temp = temp.ToUpper();
             control = Convert.ToChar(temp);
 
             switch (control)
             {
-                case 'A':
-                    return;
                 case 'Q':
                     Environment.Exit(0);
                     break;
                 case 'N':
+                    Console.Clear();
                     RunUserInterface(NORMAL_MODE);
                     break;
                 case 'C':
@@ -36,11 +65,12 @@ namespace CalculatorApp
                     break;
                 case 'Z':
                     Console.Clear();
-                    RunUserInterface(NORMAL_MODE);
-                    break;
+                    UserInterface();
+                    if (finishedCalculation == true) RunUserInterface('0');
+                    return;
                 default:
                     Console.WriteLine("Invalid key. Please, try again");
-                    NextAction();
+                    NextAction(Console.ReadKey().KeyChar);
                     break;
             }
         }
@@ -98,6 +128,8 @@ namespace CalculatorApp
                 else Console.Write("\nIntroduce the second operand: ");
 
                 string number = Console.ReadLine();
+                if (number.Length == 1)
+                    CheckIfNextAction(Convert.ToChar(number));
                 if (number.Contains("."))
                 {
                     number = number.Replace('.', ',');
@@ -120,7 +152,6 @@ namespace CalculatorApp
                 {
                     Console.WriteLine("You entered a number out of the range of the decimal type");
                 }
-                NextAction();
             }
             return decimalNumber;
         }
@@ -157,18 +188,27 @@ namespace CalculatorApp
                     }
                 default:
                     {
-                        Console.WriteLine("An unexistent operator. Please, try again.");
-                        NextAction();
+                        if(CheckIfShortcut(op) == false)
+                            Console.WriteLine("\nAn unexistent operator. Please, try again.");
                         break;
                     }
             };
 
             return validOperator;
         }
+        static void UserInterface()
+        {
+            Console.WriteLine("                                      ____________________________");
+            Console.WriteLine("                                       | Console Calculator App |");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Press Q to quit   | Z to clear screen  |  C to continue the previous one  |  N to start a new calculation...  ");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("                  Please, choose the operation by inputting its corresponding operator");
+        }
         static void RunUserInterface(char control)
         {
-            Console.WriteLine("\n----------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Please, choose the operation by inputting its corresponding operator");
+            finishedCalculation = false;
+            UserInterface();
 
             bool validOperator = false;
 
@@ -177,7 +217,7 @@ namespace CalculatorApp
                 Console.WriteLine("Operators:  +(addition)  -(subtraction)  /(division)  *(multiplication)  %(remainder)");
                 Console.Write("Operator: ");
                 char op = Console.ReadKey().KeyChar;
-                Console.WriteLine("\n");
+                CheckIfNextAction(op);
 
                 validOperator = CheckOperator(op);
                 if (validOperator) _operator = op;
@@ -193,11 +233,11 @@ namespace CalculatorApp
             result = CalculateResult(_operator, operand1, operand2);
 
             Console.WriteLine($"{operand1:F3} {_operator:F3} {operand2} = {result:F8}");
-            NextAction();
+            finishedCalculation = true;
+            NextAction(Console.ReadKey().KeyChar);
         }
         static void Main(string[] args)
         {
-            Console.WriteLine("                                        Console Calculator App");
             RunUserInterface('0');
         }
     }
