@@ -12,7 +12,7 @@ namespace CalculatorApp
             cursorXPosition = Console.CursorLeft;
             cursorYPosition = Console.CursorTop;
 
-            Console.SetCursorPosition(0, Console.WindowHeight - 5);
+            Console.SetCursorPosition(0, Console.CursorTop + 5);
             Console.WriteLine("                                              ____________________________");
             Console.WriteLine("                                               | Console Calculator App |");
             Console.WriteLine("      --------------------------------------------------------------------------------------------------------------");
@@ -27,7 +27,6 @@ namespace CalculatorApp
             Console.WriteLine($"{operand1:F3} {_operator:F3} {operand2} = {result:F8}");
             Console.ResetColor();
 
-            
         }
     }
 }
