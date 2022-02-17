@@ -13,6 +13,9 @@ namespace CalculatorApp
             cursorYPosition = Console.CursorTop;
 
             Console.SetCursorPosition(0, Console.CursorTop + 5);
+            Console.WriteLine("                                                                                                                    ");
+            Console.WriteLine("                                                                                                                    ");
+            Console.WriteLine("                                                                                                                    ");
             Console.WriteLine("                                              ____________________________");
             Console.WriteLine("                                               | Console Calculator App |");
             Console.WriteLine("      --------------------------------------------------------------------------------------------------------------");
