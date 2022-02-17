@@ -40,10 +40,11 @@ namespace CalculatorApp
 
         public static void ReadKey()
         {
-            Console.WriteLine("\nPress any available shortcut... ");
+            Console.Write("\nPress any available shortcut...  ");
             shortcut = Console.ReadKey().KeyChar;
             shortcut = ToUpper(shortcut);
-
+            Console.WriteLine();
+            UserInterface.ShowMainInterface();
             ChooseAction(shortcut);
         }
 
@@ -60,7 +61,7 @@ namespace CalculatorApp
                     Launch.Execute();
                     break;
                 case 'C':
-                    Console.WriteLine("Unavailable feature.");
+                    Console.WriteLine("\nUnavailable feature.");
                     ReadKey();
                     break;
                 case 'Z':

@@ -15,6 +15,9 @@ namespace CalculatorApp
                 Console.WriteLine("Operators:      +(addition)   |   -(subtraction)   |   /(division)   |   *(multiplication)");
                 Console.Write("Operator: ");
                 char op = Console.ReadKey().KeyChar;
+
+                UserInterface.ShowMainInterface();
+
                 NextAction.CheckIfShortcut(op);
 
                 Console.WriteLine();

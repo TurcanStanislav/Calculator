@@ -13,6 +13,9 @@ namespace CalculatorApp
             {
                 Console.Write("Input first/second operand: ");
                 string number = Console.ReadLine();
+
+                UserInterface.ShowMainInterface();
+
                 if(number.Length == 1) NextAction.CheckIfShortcut(Convert.ToChar(number));
 
                 if (number.Contains("."))
