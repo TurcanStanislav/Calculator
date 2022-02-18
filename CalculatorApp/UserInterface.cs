@@ -32,7 +32,6 @@ namespace CalculatorApp
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine($"{operand1:F3} {_operator:F3} {operand2} = {result:F8}");
             Console.ResetColor();
-
         }
     }
 }

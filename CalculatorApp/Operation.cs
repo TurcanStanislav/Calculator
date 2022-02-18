@@ -45,5 +45,22 @@ namespace CalculatorApp
 
             return resultOfOperation;
         }
+        public static decimal Calculate(string operation, decimal value)
+        {
+            switch (operation)
+            {
+                case "rad":
+                    {
+                        resultOfOperation = (decimal)Math.Sqrt((double) value);
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            };
+
+            return resultOfOperation;
+        }
     }
 }

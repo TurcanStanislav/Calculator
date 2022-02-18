@@ -16,11 +16,22 @@ namespace CalculatorApp
 
                 UserInterface.ShowMainInterface();
 
-                if(number.Length == 1) NextAction.CheckIfShortcut(Convert.ToChar(number));
+                if (number.Length == 1)
+                {
+                    NextAction.CheckIfShortcut(Convert.ToChar(number));
+                    continue;
+                }
 
                 if (number.Contains("."))
                 {
                     number = number.Replace('.', ',');
+                }
+                
+                if(number.StartsWith("-00") || number.StartsWith("00") || 
+                    number.StartsWith("0") && number.Length > 1)
+                {
+                    Console.WriteLine("\nYou did not enter the number in the right format");
+                    continue;
                 }
 
                 try
