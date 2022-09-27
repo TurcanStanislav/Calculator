@@ -42,6 +42,10 @@ namespace CalculatorApp
             {
                 Console.WriteLine("The result is out of the bounds of decimal type");
             }
+            catch(DivideByZeroException e)
+            {
+                Console.WriteLine("You tried to divide by zero. Try again.");
+            }
 
             return resultOfOperation;
         }

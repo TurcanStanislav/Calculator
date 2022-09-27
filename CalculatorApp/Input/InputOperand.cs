@@ -21,14 +21,26 @@ namespace CalculatorApp
 
                 UserInterface.ShowMainInterface();
 
-                if (number.Length == 1)
+                //decimal zero = 0;
+                //if (Launch.Operator() == '/' && ord == "second" && Convert.ToString(number) == Convert.ToString(zero))
+                //    continue;
+
+                if (number.Length == 1 && decimal.TryParse(number, out decimal temp) == false)
                 {
+                    bool isShortcut = false;
                     foreach (char ch in NextAction.hotkeys)
                         if (number == Convert.ToString(ch))
                         {
                             NextAction.CheckIfShortcut(Convert.ToChar(number));
+                            isShortcut = true;
                             break;
                         }
+                    if(isShortcut) continue;
+                }
+
+                if(number == "-" || number == "+")
+                {
+                    Console.WriteLine("\nYou did not enter the number in the right format");
                     continue;
                 }
 
@@ -37,10 +49,11 @@ namespace CalculatorApp
                     number = number.Replace('.', ',');
                 }
                 
-                if(number.StartsWith("-00") || number.StartsWith("00") || 
-                    number.StartsWith("0") && number.Length > 1)
+                if(number.StartsWith("-00") || number.StartsWith("0") && 
+                   number.Length > 1 && !number.StartsWith("0,") ||
+                   number.Equals("-0") || number.Equals("+0"))
                 {
-                    Console.WriteLine("\nYou did not enter the number in the right format");
+                    Console.WriteLine("\nYou did not enter the number in the right format.");
                     continue;
                 }
 
@@ -51,15 +64,15 @@ namespace CalculatorApp
                 }
                 catch (ArgumentNullException e)
                 {
-                    Console.WriteLine("\nyou did not enter anything");
+                    Console.WriteLine("\nYou did not enter anything");
                 }
                 catch (FormatException e)
                 {
-                    Console.WriteLine("\nyou did not enter the number in the right format");
+                    Console.WriteLine("\nYou did not enter the number in the right format");
                 }
                 catch (OverflowException e)
                 {
-                    Console.WriteLine("\nyou entered a number out of the range of the decimal type");
+                    Console.WriteLine("\nYou entered a number out of the range of the decimal type");
                 }
 
                 //if (decimal.TryParse(number, out decimalNumber))

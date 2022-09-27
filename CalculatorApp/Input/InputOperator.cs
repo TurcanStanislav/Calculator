@@ -18,9 +18,11 @@ namespace CalculatorApp
 
                 UserInterface.ShowMainInterface();
 
-                NextAction.CheckIfShortcut(op);
+                bool isShortcut = NextAction.CheckIfShortcut(op);
+                if (isShortcut == true) continue;
 
                 Console.WriteLine();
+
                 if (CheckOperator(op) == true)
                 {
                     _operator = op;

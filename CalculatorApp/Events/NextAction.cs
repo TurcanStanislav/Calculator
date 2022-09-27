@@ -48,35 +48,38 @@ namespace CalculatorApp
 
             return quitApproved;
         }
-        public static void CheckIfShortcut(char control)
+        public static bool CheckIfShortcut(char control)
         {
+            bool isShortcut = false;
             control = ToUpper(control);
 
             switch (control)
             {
                 case 'Q':
                     if (CheckQuit() == true)
-                    {
                         ChooseAction(control);
-                        break;
-                    }
                     else
-                    {
                         ReadKey();
-                        break;
-                    }
+
+                    isShortcut = true;
+                    break;
                 case 'N':
                     ChooseAction(control);
+                    isShortcut = true;
                     break;
                 case 'C':
                     ChooseAction(control);
+                    isShortcut = true;
                     break;
                 case 'Z':
                     ChooseAction(control);
+                    isShortcut = true;
                     break;
                 default:
-                    return;
+                    return isShortcut;
             }
+
+            return isShortcut;
         }
 
         public static void ReadKey()
@@ -100,7 +103,7 @@ namespace CalculatorApp
                     Launch.Execute();
                     break;
                 case 'C':
-                    Console.WriteLine("\nUnavailable feature.");
+                    Console.Write("\nUnavailable feature.");
                     ReadKey();
                     break;
                 case 'Z':
