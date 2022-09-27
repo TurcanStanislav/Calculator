@@ -44,13 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeContainer.cs" />
-    <Compile Include="InputOperand.cs" />
-    <Compile Include="InputOperator.cs" />
+    <Compile Include="Input\InputOperand.cs" />
+    <Compile Include="Input\InputOperator.cs" />
     <Compile Include="Launch.cs" />
-    <Compile Include="NextAction.cs" />
-    <Compile Include="Operation.cs" />
+    <Compile Include="Events\NextAction.cs" />
+    <Compile Include="Calculation\Operation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInterface.cs" />
+    <Compile Include="UI\UserInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
